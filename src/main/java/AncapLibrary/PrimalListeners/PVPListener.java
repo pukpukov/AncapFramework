@@ -1,5 +1,6 @@
 package AncapLibrary.PrimalListeners;
 
+import AncapLibrary.AncapEvents.AncapPVPEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
@@ -9,7 +10,6 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import states.AncapLibrary.AncapEvents.AncapPVPEvent;
 
 public class PVPListener implements Listener {
     @EventHandler
