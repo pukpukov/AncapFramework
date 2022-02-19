@@ -128,6 +128,12 @@
       <version>1.16.5-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>ru.pukpukov</groupId>
+      <artifactId>AncapDatabase</artifactId>
+      <version>alpha-1.0.0.1</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
   <distributionManagement>
     <repository>

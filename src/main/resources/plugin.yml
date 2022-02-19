@@ -1,0 +1,6 @@
+main: AncapLibrary.Library.AncapLibrary
+version: 1.0-SNAPSHOT.1
+name: AncapLibrary
+
+depend:
+  - AncapDatabase
