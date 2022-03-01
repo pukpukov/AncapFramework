@@ -1,6 +1,6 @@
 
 # AncapLibrary
-Фреймворк для баккит-разработки. Делает рутинные вещи за разработчика.
+Фреймворк для баккит-разработки. Выполняет рутинные задачи
 
 ## Использование с помощью Maven
 
@@ -23,39 +23,41 @@
      </repositories>
      
      <dependencies>  
-	     <dependency> 
-		     <groupId>org.spigotmc</groupId>  
-		     <artifactId>spigot-api</artifactId>  
-		     <version>1.16.5-R0.1-SNAPSHOT</version>  
-		     <scope>provided</scope>  
-	     </dependency>  
-	     <dependency> 
-		     <groupId>ru.pukpukov</groupId>  
-		     <artifactId>AncapLibrary</artifactId>  
-		     <version>1.0-SNAPSHOT.1</version>  
-		     <scope>provided</scope>  
-		 </dependency>  
-	     <dependency>
-		     <groupId>ru.pukpukov</groupId>  
-		     <artifactId>AncapDatabase</artifactId>  
-		     <version>alpha.1.0.1</version>  
-		     <scope>provided</scope>  
-	     </dependency>
-	     <dependency>  
-			 <groupId>ru.pukpukov</groupId>  
-			 <artifactId>AncapLibrary</artifactId>  
-			 <version>1.0-SNAPSHOT.1</version>  
-			 <scope>provided</scope>  
+		<dependency> 
+			<groupId>org.spigotmc</groupId>  
+			<artifactId>spigot-api</artifactId>  
+			<version>1.16.5-R0.1-SNAPSHOT</version>  
+			<scope>provided</scope>  
+		</dependency>  
+		<dependency> 
+			<groupId>ru.pukpukov</groupId>  
+			<artifactId>AncapLibrary</artifactId>  
+			<version>1.0-SNAPSHOT.1</version>  
+			<scope>provided</scope>  
+		</dependency>  
+		<dependency>
+			<groupId>ru.pukpukov</groupId>  
+			<artifactId>AncapDatabase</artifactId>  
+			<version>alpha.1.0.1</version>  
+			<scope>provided</scope>  
+		</dependency>
+		<dependency>  
+			<groupId>ru.pukpukov</groupId>  
+			<artifactId>AncapLibrary</artifactId>  
+			<version>1.0-SNAPSHOT.1</version>  
+			<scope>provided</scope>  
 		</dependency>
      </dependencies>
 
 ## Использование
-Объявление мейн-класса плагина
+
+### Объявление мейн-класса плагина
 
     public class AncapAFB extends AncapPlugin {
     
     }
-Использование AncapLibrary EventAPI
+
+### Использование AncapLibrary EventAPI
 
     public class AncapStatesEventsListener implements Listener {  
       
