@@ -1,24 +1,27 @@
 
 # AncapLibrary
-Фреймворк для баккит-разработки. Выполняет рутинные задачи
+Фреймворк для баккит-разработки. 
+
+## Фичи
+- Раз
 
 ## Использование с помощью Maven
 
 	 </repositories>
 	     <repository>  
-		     <id>AncapDatabase-mvn-repo</id>  
-		     <url>https://raw.github.com/PukPukov/AncapDatabase/mvn-repo/</url>  
-		     <snapshots> 
-			     <enabled>true</enabled>  
-			     <updatePolicy>always</updatePolicy>  
-		     </snapshots>
+			<id>AncapDatabase-mvn-repo</id>  
+			<url>https://raw.github.com/PukPukov/AncapDatabase/mvn-repo/</url>  
+			<snapshots> 
+				<enabled>true</enabled>  
+				<updatePolicy>always</updatePolicy>  
+			</snapshots>
 	     </repository>
 	     <repository>  
-			 <id>AncapLibrary-mvn-repo</id>  
+			<id>AncapLibrary-mvn-repo</id>  
 			 <url>https://raw.github.com/PukPukov/AncapLibrary/mvn-repo/</url>  
 			 <snapshots>
-				 <enabled>true</enabled>  
-				 <updatePolicy>always</updatePolicy>  
+				<enabled>true</enabled>  
+				<updatePolicy>always</updatePolicy>  
 			 </snapshots></repository>
      </repositories>
      
@@ -61,7 +64,7 @@
 
     public class AncapStatesEventsListener implements Listener {  
       
-		@EventHandler  
+	    @EventHandler  
 	    public void onWorldInteract(AncapWorldInteractEvent e) {  
 	        if (e.isIntercepted()) {  
 	            return;  
