@@ -6,7 +6,7 @@
 
     <groupId>ru.pukpukov</groupId>
     <artifactId>AncapLibrary</artifactId>
-    <version>1.0-SNAPSHOT.1</version>
+    <version>1.0-SNAPSHOT.4</version>
 
     <repositories>
 
@@ -182,7 +182,7 @@
         <dependency>
             <groupId>ru.pukpukov</groupId>
             <artifactId>AncapDatabase</artifactId>
-            <version>alpha-1.0.0.1</version>
+            <version>alpha.1.0.2</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

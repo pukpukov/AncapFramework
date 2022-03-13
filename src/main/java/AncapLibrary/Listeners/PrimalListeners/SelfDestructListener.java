@@ -1,4 +1,4 @@
-package AncapLibrary.PrimalListeners;
+package AncapLibrary.Listeners.PrimalListeners;
 
 import AncapLibrary.AncapEvents.AncapWorldSelfDestructEvent;
 import org.bukkit.Bukkit;
@@ -9,11 +9,18 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockPistonEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 public class SelfDestructListener implements Listener {
+
+    @EventHandler
+    public void onBlockFromTo(BlockFromToEvent e) {
+        Event event = new AncapWorldSelfDestructEvent(e, e.getBlock().getLocation(), e.getToBlock().getLocation());
+        Bukkit.getPluginManager().callEvent(event);
+    }
 
     @EventHandler(priority = EventPriority.LOW)
     public void damage(EntityDamageByEntityEvent e) {

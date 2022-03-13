@@ -14,24 +14,19 @@ public class Balance {
     private static Database statesDB = AncapLibrary.getConfiguredDatabase();
 
     private void generate(BalanceHolder holder) {
+        if (holder.getMeta("balance.iron") != null) {
+            return;
+        }
         holder.setMeta("balance.iron", "0");
         holder.setMeta("balance.diamond", "0");
         holder.setMeta("balance.netherite", "0");
     }
 
-    private void generate(String type, String id) {
-        if (!statesDB.isSet("states."+type+"."+id+".balance.iron")) {
-            statesDB.write("states."+type+"."+id+".balance.iron", "0");
-            statesDB.write("states."+type+"."+id+".balance.diamond", "0");
-            statesDB.write("states."+type+"."+id+".balance.netherite", "0");
-        }
-    }
-
     public Balance(BalanceHolder holder) {
         this.generate(holder);
-        this.iron = holder.getBalance().getIron();
-        this.diamond = holder.getBalance().getDiamond();
-        this.netherite = holder.getBalance().getNetherite();
+        this.iron = Double.parseDouble(holder.getMeta("balance.iron"));
+        this.diamond = Double.parseDouble(holder.getMeta("balance.diamond"));
+        this.netherite = Double.parseDouble(holder.getMeta("balance.netherite"));
     }
 
     public Balance(double iron, double diamond, double netherite) {

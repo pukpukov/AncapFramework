@@ -1,12 +1,12 @@
 package AncapLibrary.Library;
 
-import AncapLibrary.PrimalListeners.ExplodeListener;
-import AncapLibrary.PrimalListeners.PVPListener;
-import AncapLibrary.PrimalListeners.ProtectListener;
-import AncapLibrary.PrimalListeners.SelfDestructListener;
+import AncapLibrary.Listeners.PrimalListeners.ExplodeListener;
+import AncapLibrary.Listeners.PrimalListeners.PVPListener;
+import AncapLibrary.Listeners.PrimalListeners.ProtectListener;
+import AncapLibrary.Listeners.PrimalListeners.SelfDestructListener;
 import AncapLibrary.Timer.Heartbeat.AncapHeartbeat;
 import Database.Database;
-import Database.Databases.BukkitConfigDatabase;
+import Database.Databases.BukkitConfigDatabase.BukkitConfigDatabase;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;

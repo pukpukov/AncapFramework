@@ -1,4 +1,4 @@
-package AncapLibrary.PrimalListeners;
+package AncapLibrary.Listeners.PrimalListeners;
 
 import AncapLibrary.AncapEvents.AncapWorldInteractEvent;
 import AncapLibrary.Player.AncapPlayer;

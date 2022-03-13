@@ -1,4 +1,4 @@
-package AncapLibrary.PrimalListeners;
+package AncapLibrary.Listeners.PrimalListeners;
 
 import AncapLibrary.AncapEvents.AncapPVPEvent;
 import org.bukkit.Bukkit;
