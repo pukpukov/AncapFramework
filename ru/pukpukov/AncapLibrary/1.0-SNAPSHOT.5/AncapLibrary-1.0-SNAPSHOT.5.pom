@@ -131,7 +131,7 @@
     <dependency>
       <groupId>ru.pukpukov</groupId>
       <artifactId>AncapDatabase</artifactId>
-      <version>LATEST</version>
+      <version>alpha.1.2.1</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
