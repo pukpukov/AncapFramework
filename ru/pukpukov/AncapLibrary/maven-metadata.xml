@@ -3,10 +3,10 @@
   <groupId>ru.pukpukov</groupId>
   <artifactId>AncapLibrary</artifactId>
   <versioning>
-    <release>1.0-SNAPSHOT.7</release>
+    <release>1.0-SNAPSHOT.8</release>
     <versions>
-      <version>1.0-SNAPSHOT.7</version>
+      <version>1.0-SNAPSHOT.8</version>
     </versions>
-    <lastUpdated>20220320220708</lastUpdated>
+    <lastUpdated>20220321191257</lastUpdated>
   </versioning>
 </metadata>
