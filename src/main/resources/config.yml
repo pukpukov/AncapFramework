@@ -1,0 +1,3 @@
+invalid_args_count: "&cНеверное число аргументов (%count%), необходимо %accepted%"
+invalid_args: "Неверный аргумент <%argument%>, допустимы только <%accepted%>"
+no_perms: "&cНедостаточно прав для выполнения действия"

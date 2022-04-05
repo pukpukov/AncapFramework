@@ -1,21 +1,19 @@
 package AncapLibrary.AncapEvents;
 
-import AncapLibrary.Library.Interceptable;
-import org.bukkit.Location;
+import AncapLibrary.Location.AncapLocation;
 import org.bukkit.event.Cancellable;
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
-public class AncapWorldSelfDestructEvent extends Event implements Cancellable, Interceptable {
+public class AncapWorldSelfDestructEvent extends AncapEvent implements Cancellable {
 
-    private Location[] locations = new Location[2];
     private Cancellable event;
+    private AncapLocation[] locations = new AncapLocation[2];
     private boolean intercepted;
 
     public static final HandlerList handlers = new HandlerList();
 
-    public AncapWorldSelfDestructEvent(Cancellable e, Location interacted, Location interacting) {
+    public AncapWorldSelfDestructEvent(Cancellable e, AncapLocation interacted, AncapLocation interacting) {
         event = e;
         locations[0] = interacted;
         locations[1] = interacting;
@@ -31,7 +29,7 @@ public class AncapWorldSelfDestructEvent extends Event implements Cancellable, I
         return handlers;
     }
 
-    public Location[] getLocations() {
+    public AncapLocation[] getLocations() {
         return this.locations;
     }
 
@@ -49,13 +47,4 @@ public class AncapWorldSelfDestructEvent extends Event implements Cancellable, I
         event.setCancelled(b);
     }
 
-    @Override
-    public boolean isIntercepted() {
-        return this.intercepted;
-    }
-
-    @Override
-    public void setIntercepted(boolean b) {
-        this.intercepted = b;
-    }
 }

@@ -1,12 +1,13 @@
 package AncapLibrary.AncapEvents;
 
 import AncapLibrary.Player.AncapPlayer;
-import org.bukkit.Location;
+import org.bukkit.entity.Villager;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
-public class AncapWorldInteractEvent extends AncapEvent implements Cancellable {
+public class AncapVillagerHealEvent extends AncapEvent implements Cancellable {
+
 
     private boolean intercepted;
 
@@ -14,12 +15,12 @@ public class AncapWorldInteractEvent extends AncapEvent implements Cancellable {
 
     private final AncapPlayer player;
 
-    private final Location loc;
+    private final Villager villager;
 
-    public AncapWorldInteractEvent(Cancellable event, AncapPlayer player, Location loc) {
+    public AncapVillagerHealEvent(Cancellable event, AncapPlayer player, Villager villager) {
         this.event = event;
         this.player = player;
-        this.loc = loc;
+        this.villager = villager;
     }
 
     public static final HandlerList handlers = new HandlerList();
@@ -52,7 +53,8 @@ public class AncapWorldInteractEvent extends AncapEvent implements Cancellable {
         return this.player;
     }
 
-    public Location getLocation() {
-        return this.loc;
+    public Villager getVillager() {
+        return this.villager;
     }
+
 }

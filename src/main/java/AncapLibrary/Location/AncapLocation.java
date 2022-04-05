@@ -1,59 +1,43 @@
 package AncapLibrary.Location;
 
-import AncapLibrary.Location.Exceptions.AncapLocationException;
-import org.bukkit.Bukkit;
+import AncapLibrary.Location.CartesianCoordinates.AncapCartesianPosition;
 import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.block.Block;
 
 public class AncapLocation {
 
-    private Location location;
+    private AncapWorld world;
+    private AncapCartesianPosition position;
 
-    public AncapLocation(String locationString) {
-        this.validateLocation(locationString);
-        String[] strings = locationString.split(";");
-        World world = Bukkit.getWorld(strings[0]);
-        double x = Double.parseDouble(strings[1]);
-        double y = Double.parseDouble(strings[2]);
-        double z = Double.parseDouble(strings[3]);
-        this.location = new Location(world, x, y, z);
+    public AncapLocation(AncapWorld world, AncapCartesianPosition position) {
+        this.world = world;
+        this.position = position;
     }
 
-    public AncapLocation(Location loc) {
-        this.location = loc;
+    public AncapLocation(Location location) {
+        this(new AncapWorld(location), new AncapCartesianPosition(location));
     }
 
-    private void validateLocation(String locationString) {
-        String[] strings = locationString.split(";");
-        if (strings.length != 4) {
-            throw new AncapLocationException("AncapLocation can't be defined by "+locationString+": illegal amount of values ("+locationString.length()+"), expecting 4");
-        }
-        if (locationString.matches("[0-9;.]+")) {
-            throw new AncapLocationException("AncapLocation can't be defined by "+locationString+": illegal characters (only numbers, points and semicolons allowed)");
-        }
+    public AncapLocation(Block block) {
+        this(block.getLocation());
     }
 
-    public Location getLocation() {
-        return this.location;
+    public boolean blockEquals(AncapLocation other) {
+        return other.getWorld().equals(this.world) &&
+                other.getPosition().roundEquals(this.position);
+    }
+
+    protected AncapWorld getWorld() {
+        return world;
+    }
+
+    protected AncapCartesianPosition getPosition() {
+        return position;
     }
 
     @Override
     public String toString() {
-        return location.getWorld().getName()+";"+
-                location.getBlockX()+";"+
-                location.getBlockY()+";"+
-                location.getBlockZ();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (!AncapLocation.class.isAssignableFrom(obj.getClass())) {
-            return false;
-        }
-        AncapLocation other = (AncapLocation)obj;
-        return other.getLocation().equals(this.location);
+        return world.toString()+";"+
+                position.toString();
     }
 }

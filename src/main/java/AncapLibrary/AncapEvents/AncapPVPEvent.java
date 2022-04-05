@@ -1,13 +1,11 @@
 package AncapLibrary.AncapEvents;
 
-import AncapLibrary.Library.Interceptable;
 import org.bukkit.Location;
 import org.bukkit.event.Cancellable;
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
-public class AncapPVPEvent extends Event implements Interceptable, Cancellable {
+public class AncapPVPEvent extends AncapEvent implements Cancellable {
 
     private Location[] locations = new Location[2];
     private Cancellable event;
@@ -46,15 +44,5 @@ public class AncapPVPEvent extends Event implements Interceptable, Cancellable {
     @Override
     public void setCancelled(boolean b) {
         event.setCancelled(b);
-    }
-
-    @Override
-    public boolean isIntercepted() {
-        return this.intercepted;
-    }
-
-    @Override
-    public void setIntercepted(boolean b) {
-        this.intercepted = b;
     }
 }

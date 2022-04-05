@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ru.pukpukov</groupId>
   <artifactId>AncapLibrary</artifactId>
-  <version>1.0-SNAPSHOT.4</version>
+  <version>1.0-SNAPSHOT.16</version>
   <build>
     <plugins>
       <plugin>
@@ -76,7 +76,7 @@
           </execution>
         </executions>
         <configuration>
-          <message>Maven artifacts for ${project.version}</message>
+          <ancapMessage>Maven artifacts for ${project.version}</ancapMessage>
           <noJekyll>true</noJekyll>
           <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
           <branch>refs/heads/mvn-repo</branch>
@@ -131,7 +131,7 @@
     <dependency>
       <groupId>ru.pukpukov</groupId>
       <artifactId>AncapDatabase</artifactId>
-      <version>alpha.1.0.2</version>
+      <version>alpha.1.2.1</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>

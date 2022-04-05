@@ -1,10 +1,10 @@
-package AncapLibrary.Timer.TimerEvents;
+package AncapLibrary.Timer.ClassicTimerEvents;
 
-import org.bukkit.event.Event;
+import AncapLibrary.Timer.AncapTimerEvent;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
-public class FastTimerTenSecondEvent extends Event {
+public class FastTimerTenMinutesEvent extends AncapTimerEvent {
 
     public static final HandlerList handlers = new HandlerList();
 

@@ -1,9 +1,9 @@
 package AncapLibrary.Timer;
 
 import AncapLibrary.Timer.Heartbeat.AncapHeartbeatEvent;
-import AncapLibrary.Timer.TimerEvents.FastTimerTenMinutesEvent;
-import AncapLibrary.Timer.TimerEvents.FastTimerTenSecondEvent;
-import AncapLibrary.Timer.TimerEvents.SafeTimerOneDayEvent;
+import AncapLibrary.Timer.ClassicTimerEvents.FastTimerTenMinutesEvent;
+import AncapLibrary.Timer.ClassicTimerEvents.FastTimerTenSecondEvent;
+import AncapLibrary.Timer.ClassicTimerEvents.SafeTimerOneDayEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

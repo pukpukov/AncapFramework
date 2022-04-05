@@ -1,14 +1,15 @@
 package AncapLibrary.Library;
 
 import AncapLibrary.Economy.Balance;
+import AncapLibrary.Economy.Exceptions.NotEnoughMoneyException;
 
 public interface BalanceHolder extends AncapObject {
 
-    public Balance getBalance();
+    Balance getBalance();
 
-    public void setBalance(Balance balance);
+    void setBalance(Balance balance);
 
-    public default void transferMoney(BalanceHolder recipient, Balance balance) {
+    default void transferMoney(BalanceHolder recipient, Balance balance) throws NotEnoughMoneyException {
         Balance nationBalance = this.getBalance();
         Balance recipientBalance = recipient.getBalance();
         nationBalance.remove(balance);

@@ -1,55 +1,56 @@
 package AncapLibrary.Library;
 
-import AncapLibrary.Listeners.PrimalListeners.ExplodeListener;
-import AncapLibrary.Listeners.PrimalListeners.PVPListener;
-import AncapLibrary.Listeners.PrimalListeners.ProtectListener;
-import AncapLibrary.Listeners.PrimalListeners.SelfDestructListener;
+import AncapLibrary.Commands.Command;
+import AncapLibrary.Configuration.AncapLibraryConfiguration;
+import AncapLibrary.Listeners.PrimalListeners.*;
+import AncapLibrary.Plugins.AncapPlugin;
 import AncapLibrary.Timer.Heartbeat.AncapHeartbeat;
 import Database.Database;
 import Database.Databases.BukkitConfigDatabase.BukkitConfigDatabase;
-import org.bstats.bukkit.Metrics;
-import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.java.JavaPlugin;
 
-public class AncapLibrary extends JavaPlugin {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public final class AncapLibrary extends AncapPlugin {
 
     public static final int pluginId = 14261;
 
-    private static AncapLibrary instance;
-
+    private static AncapLibrary plugin;
+    private static AncapLibraryConfiguration configuration;
     private static Database database;
+
+    private final List<Command> commands = new ArrayList(Arrays.asList(
+            new
+    ));
+
+    private final List<Listener> listeners = new ArrayList(Arrays.asList(
+            new ProtectListener(),
+            new PVPListener(),
+            new SelfDestructListener(),
+            new ExplodeListener(),
+            new VillagerHealListener()
+    ));
 
     @Override
     public void onEnable() {
+        super.onEnable();
         this.registerInstance();
-        this.registerDatabase();
+        this.loadDatabase();
+        this.loadConfiguration();
         this.registerEventsListeners();
-        this.registerMetrics();
         this.startHeartbeat();
+        this.startTimers();
+        this.finishLoading();
     }
 
-    public static AncapLibrary getInstance() {
-        return instance;
+    private void finishLoading() {
+
     }
 
-    public static Database getConfiguredDatabase() {
-        return database;
-    }
+    private void startTimers() {
 
-    private void registerInstance() {
-        instance = this;
-    }
-
-    private void registerDatabase() {
-        database = new BukkitConfigDatabase("AncapLibraryDB.yml");
-    }
-
-    private void registerEventsListeners() {
-        registerEventsListener(new ProtectListener());
-        registerEventsListener(new PVPListener());
-        registerEventsListener(new SelfDestructListener());
-        registerEventsListener(new ExplodeListener());
     }
 
     private void startHeartbeat() {
@@ -57,11 +58,45 @@ public class AncapLibrary extends JavaPlugin {
         heartbeat.start();
     }
 
-    private void registerMetrics() {
-        Metrics metrics = new Metrics(this, pluginId);
+
+    private void registerEventsListeners() {
+        registerEventsListener(new ProtectListener());
+        registerEventsListener(new PVPListener());
+        registerEventsListener(new SelfDestructListener());
+        registerEventsListener(new ExplodeListener());
+        registerEventsListener(new VillagerHealListener());
     }
 
-    public static void registerEventsListener(Listener listener) {
-        Bukkit.getPluginManager().registerEvents(listener, AncapLibrary.getInstance());
+    @Override
+    protected List<Listener> getListeners() {
+        return listeners;
+    }
+
+    @Override
+    protected int getPluginID() {
+        return pluginId;
+    }
+
+
+    private void loadDatabase() {
+        database = new BukkitConfigDatabase("AncapLibraryDB.yml");
+    }
+
+
+    private void loadConfiguration() {
+        this.saveDefaultConfig();
+        configuration = new AncapLibraryConfiguration(this.getConfig());
+    }
+
+    private void registerInstance() {
+        instance = this;
+    }
+
+    public static AncapLibraryConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public static Database getConfiguredDatabase() {
+        return database;
     }
 }

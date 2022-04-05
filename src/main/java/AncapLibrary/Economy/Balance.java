@@ -1,157 +1,84 @@
 package AncapLibrary.Economy;
 
-import AncapLibrary.Library.AncapLibrary;
-import AncapLibrary.Library.BalanceHolder;
-import AncapLibrary.Message.Message;
-import Database.Database;
+
+import AncapLibrary.Economy.Exceptions.NotEnoughMoneyException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Balance {
 
-    private double iron;
-    private double diamond;
-    private double netherite;
+    private List<AncapWallet> wallets;
 
-    private static Database statesDB = AncapLibrary.getConfiguredDatabase();
+    public Balance() {
+        this.wallets = new ArrayList<>();
+    }
 
-    private void generate(BalanceHolder holder) {
-        if (holder.getMeta("balance.iron") != null) {
-            return;
+    public Balance(List<AncapWallet> wallets) {
+        this.wallets = wallets;
+    }
+
+    public Balance(Balance balance) {
+        this.wallets = balance.wallets;
+    }
+
+    public boolean have(Balance balance) {
+        for (AncapWallet wallet : balance.wallets) {
+            if (!this.have(wallet)) {
+                return false;
+            }
         }
-        holder.setMeta("balance.iron", "0");
-        holder.setMeta("balance.diamond", "0");
-        holder.setMeta("balance.netherite", "0");
+        return true;
     }
 
-    public Balance(BalanceHolder holder) {
-        this.generate(holder);
-        this.iron = Double.parseDouble(holder.getMeta("balance.iron"));
-        this.diamond = Double.parseDouble(holder.getMeta("balance.diamond"));
-        this.netherite = Double.parseDouble(holder.getMeta("balance.netherite"));
-    }
-
-    public Balance(double iron, double diamond, double netherite) {
-        this.iron = iron;
-        this.diamond = diamond;
-        this.netherite = netherite;
-    }
-
-    public double getIron() {
-        return this.iron;
-    }
-
-    public double getDiamond() {
-        return this.diamond;
-    }
-
-    public double getNetherite() {
-        return this.netherite;
-    }
-
-    public void merge(Balance balance) {
-        this.iron = balance.getIron();
-        this.diamond = balance.getDiamond();
-        this.netherite = balance.getNetherite();
-    }
-
-    public void removeIron(double amount) {
-        amount = Math.abs(amount);
-        this.iron = this.iron - amount;
-    }
-
-    public void addIron(double amount) {
-        amount = Math.abs(amount);
-        this.iron = this.iron + amount;
-    }
-
-    public void removeDiamond(double amount) {
-        amount = Math.abs(amount);
-        this.diamond = this.diamond - amount;
-    }
-
-    public void addDiamond(double amount) {
-        amount = Math.abs(amount);
-        this.diamond = this.diamond + amount;
-    }
-
-    public void removeNetherite(double amount) {
-        amount = Math.abs(amount);
-        this.netherite = this.netherite - amount;
-    }
-
-    public void addNetherite(double amount) {
-        amount = Math.abs(amount);
-        this.netherite = this.netherite + amount;
-    }
-
-    public Message getMessage() {
-        String[] strings = new String[4];
-        strings[0] = "&6Казна:";
-        strings[1] = "     &8Незерита&8: &f"+this.getNetherite();
-        strings[2] = "     &bАлмазов&8: &f"+this.getDiamond();
-        strings[3] = "     &7Железа&8: &f"+this.getIron();
-        return new Message(strings);
-    }
-
-    public Message getTaxMessage() {
-        String[] strings = new String[4];
-        strings[0] = "&6Налоги:";
-        strings[1] = "     &8Незерита&8: &f"+this.getNetherite();
-        strings[2] = "     &bАлмазов&8: &f"+this.getDiamond();
-        strings[3] = "     &7Железа&8: &f"+this.getIron();
-        return new Message(strings);
-    }
-
-    public double getAmountForType(String type) {
-        if (type.equals("diamond")) {
-            return this.diamond;
+    public void remove(Balance balance) throws NotEnoughMoneyException {
+        for (AncapWallet wallet : balance.wallets) {
+            this.remove(wallet);
         }
-        if (type.equals("netherite")) {
-            return this.netherite;
-        }
-        if (type.equals("iron")) {
-            return this.iron;
-        }
-        return 0;
     }
 
-    public boolean haveIron(double amount) {
-        return this.iron>=amount;
-    }
-
-    public boolean haveDiamond(double amount) {
-        return this.diamond>=amount;
-    }
-
-    public boolean haveNetherite(double amount) {
-        return this.netherite>=amount;
-    }
-
-    public boolean haveForType(String type, double amount) {
-        if (type.equals("iron")) {
-            return this.haveIron(amount);
+    public void add(Balance balance) {
+        for (AncapWallet wallet : balance.wallets) {
+            this.add(wallet);
         }
-        if (type.equals("diamond")) {
-            return this.haveDiamond(amount);
+    }
+
+    public void multiply(double multiplier) {
+        for (AncapWallet ancapWallet : this.wallets) {
+            ancapWallet.multiply(multiplier);
         }
-        if (type.equals("netherite")) {
-            return this.haveNetherite(amount);
+    }
+
+    public void replace(Balance balance) {
+        this.wallets = balance.wallets;
+    }
+
+    private boolean have(AncapWallet wallet) {
+        for (AncapWallet ancapWallet : this.wallets) {
+            if (ancapWallet.have(wallet)) {
+                return true;
+            }
         }
         return false;
     }
 
-    public boolean have(Balance balance) {
-        return this.haveIron(balance.getIron()) && this.haveDiamond(balance.getDiamond()) && this.haveNetherite(balance.getNetherite());
+    private void add(AncapWallet wallet) {
+        for (AncapWallet ancapWallet : this.wallets) {
+            if (ancapWallet.isSameCurrencyWith(wallet)) {
+                ancapWallet.add(wallet);
+                return;
+            }
+            this.wallets.add(wallet);
+        }
     }
 
-    public void remove(Balance balance) {
-        this.removeIron(balance.getIron());
-        this.removeDiamond(balance.getDiamond());
-        this.removeNetherite(balance.getNetherite());
-    }
-
-    public void add(Balance balance) {
-        this.addIron(balance.getIron());
-        this.addDiamond(balance.getDiamond());
-        this.addNetherite(balance.getNetherite());
+    private void remove(AncapWallet wallet) throws NotEnoughMoneyException {
+        for (AncapWallet ancapWallet : this.wallets) {
+            if (ancapWallet.getCurrency().equals(wallet.getCurrency())) {
+                ancapWallet.remove(wallet);
+                return;
+            }
+            throw new NotEnoughMoneyException();
+        }
     }
 }
